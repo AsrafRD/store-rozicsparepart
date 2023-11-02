@@ -23,15 +23,15 @@ const MainNav: React.FC<MainNavProps> = ({
 
   return (
     <nav
-      className="mx-4 flex justify-items-center space-x-4 lg:space-x-6"
+      className="mx-6 grid grid-cols-3"
     >
       {routes.map((route) => (
         <Link
           key={route.href}
           href={route.href}
           className={cn(
-            'text-sm font-medium transition-colors hover:text-black',
-            route.active ? 'text-black' : 'text-neutral-500'
+            'inline-flex justify-center items-center rounded-sm bg-gray-100 p-2 py-2 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-100 mr-2 mb-2 transition-colors hover:text-black',
+            route.active ? 'ring-gray-400 bg-gray-50' : 'text-neutral-500'
           )}
         >
           {route.label}

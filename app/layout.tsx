@@ -1,3 +1,5 @@
+"use client"
+
 import { Urbanist } from 'next/font/google'
 
 import ModalProvider from '@/providers/modal-provider'
@@ -9,7 +11,7 @@ import './globals.css'
 
 const font = Urbanist({ subsets: ['latin'] })
 
-export const metadata = {
+const metadata = {
   title: 'Store',
   description: 'Store - The place for all your purchases.',
 }

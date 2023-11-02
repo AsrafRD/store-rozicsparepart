@@ -10,29 +10,29 @@ import { Color, Size, VehicleBrand, VehicleType, ProductBrand } from "@/types";
 interface FilterProps {
   data: (Size | Color | VehicleBrand | VehicleType | ProductBrand)[];
   name: string;
-  // valueKey: string;
+  valueKey: string;
 };
 
 const Filter: React.FC<FilterProps> = ({
   data,
   name,
-  // valueKey,
+  valueKey,
 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const selectedName = searchParams.get(name);
+  const selectedValue = searchParams.get(valueKey);
   
   const onClick = (id: string) => {
     const current = qs.parse(searchParams.toString());
 
     const query = {
       ...current,
-      [name]: id
+      [valueKey]: id
     };
 
-    if (current[name] === id) {
-      query[name] = null;
+    if (current[valueKey] === id) {
+      query[valueKey] = null;
     }
 
     const url = qs.stringifyUrl({
@@ -46,7 +46,7 @@ const Filter: React.FC<FilterProps> = ({
   return ( 
     <div className="mb-8">
       <h3 className="text-lg font-semibold">
-        {name}
+        {valueKey}
       </h3>
       <hr className="my-4" />
       <div className="flex flex-wrap gap-2">
@@ -55,7 +55,7 @@ const Filter: React.FC<FilterProps> = ({
             <Button
               className={cn(
                 'rounded-md text-sm text-gray-800 p-2 bg-white border border-gray-300',
-                selectedName === filter.id && 'bg-black text-white'
+                selectedValue === filter.id && 'bg-black text-white'
               )}
               onClick={() => onClick(filter.id)}
             >
