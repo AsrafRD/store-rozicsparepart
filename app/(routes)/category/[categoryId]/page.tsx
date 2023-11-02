@@ -5,14 +5,14 @@ import NoResults from '@/components/ui/no-results';
 
 import getProducts from "@/actions/get-products";
 import getCategory from '@/actions/get-category';
-import getSizes from '@/actions/get-sizes';
-import getColors from '@/actions/get-colors';
 import getVehicleBrands from '@/actions/get-vehicleBrands';
 import getVehicleTypes from '@/actions/get-vehicleTypes';
 import getproductBrands from '@/actions/get-productBrands';
 
 import Filter from './components/filter';
 import MobileFilters from './components/mobile-filters';
+import getCategories from '@/actions/get-categories';
+import MainNav from '@/components/main-nav';
 
 export const revalidate = 0;
 
@@ -21,8 +21,6 @@ interface CategoryPageProps {
     categoryId: string;
   },
   searchParams: {
-    // colorId: string;
-    // sizeId: string;
     vehicleBrandId: string;
     vehicleTypeId: string;
     productBrandId: string;
@@ -36,12 +34,11 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   const products = await getProducts({ 
     categoryId: params.categoryId,
   });
-  // const sizes = await getSizes();
-  // const colors = await getColors();
   const vehicleBrands = await getVehicleBrands()
   const vehicleTypes = await getVehicleTypes()
   const productBrands = await getproductBrands()
   const category = await getCategory(params.categoryId);
+  const categories = await getCategories();
 
   return (
     <div className="bg-white">
@@ -49,6 +46,7 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
         <Billboard 
           data={category.billboard}
         />
+        <MainNav data={categories}/>
         <div className="px-4 sm:px-6 lg:px-8 pb-24">
           <div className="md:grid-col5 lg:grid lg:grid-cols-5 lg:gap-x-8">
             {/* <MobileFilters sizes={sizes} colors={colors} /> */}

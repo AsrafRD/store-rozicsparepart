@@ -10,8 +10,12 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+<<<<<<< HEAD
+    "@heroicons/react": "^2.0.18",
+=======
     "@radix-ui/react-slot": "^1.0.2",
     "@tanstack/react-table": "^8.10.7",
+>>>>>>> 2b836da5f15a6470f0d17ad377627335d5d3eaff
     "axios": "^1.5.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
