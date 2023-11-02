@@ -18,10 +18,12 @@ const HomePage = async () => {
     <Container>
       <div className="space-y-5 pb-10">
         <Billboard data={billboard} />
+        <div className="border">
         <MainNav data={categories} />
         <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
           <ProductList title="Featured Products" items={products} />
         </div>
+      </div>
       </div>
     </Container>
   );
