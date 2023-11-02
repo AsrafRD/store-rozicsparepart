@@ -20,28 +20,30 @@ const categories: Category[] = [
 
 export function NavigationMenuDemo() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Products</NavigationMenuTrigger>
-          <NavigationMenuContent>
+    // <NavigationMenu>
+    //   <NavigationMenuList>
+    //     <NavigationMenuItem>
+    //       <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+    //       <NavigationMenuContent>
+    <div>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               <ListItem>
                 <MainNav data={categories} />
               </ListItem>
             </ul>
-          </NavigationMenuContent>
+      </div>
+{/*           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  );
+  ); */}
 }
 
 const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWithoutRef<'a'>>(
   ({ className, title, children, ...props }, ref) => {
     return (
       <li>
-        <NavigationMenuLink asChild>
+{/*         <NavigationMenuLink asChild> */}
           <a
             ref={ref}
             className={cn(
@@ -53,7 +55,7 @@ const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWit
             <div className="text-sm font-medium leading-none">{title}</div>
             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
           </a>
-        </NavigationMenuLink>
+{/*         </NavigationMenuLink> */}
       </li>
     );
   }
