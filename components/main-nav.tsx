@@ -28,7 +28,6 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
   }));
 
   return (
-<<<<<<< HEAD
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -55,7 +54,6 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
       </NavigationMenuList>
     </NavigationMenu>
   );
-=======
     <nav
       className="mx-6 grid grid-cols-3"
     >
@@ -73,7 +71,6 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
       ))}
     </nav>
   )
->>>>>>> a7b7f40669453d9beea9e85f8bb4eeaac92bb790
 };
 
 export default MainNav;
