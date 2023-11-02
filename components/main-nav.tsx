@@ -28,6 +28,7 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
   }));
 
   return (
+<<<<<<< HEAD
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
@@ -54,6 +55,25 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
       </NavigationMenuList>
     </NavigationMenu>
   );
+=======
+    <nav
+      className="mx-4 flex justify-items-center space-x-4 lg:space-x-6"
+    >
+      {routes.map((route) => (
+        <Link
+          key={route.href}
+          href={route.href}
+          className={cn(
+            'text-sm font-medium transition-colors hover:text-black',
+            route.active ? 'text-black' : 'text-neutral-500'
+          )}
+        >
+          {route.label}
+      </Link>
+      ))}
+    </nav>
+  )
+>>>>>>> a7b7f40669453d9beea9e85f8bb4eeaac92bb790
 };
 
 export default MainNav;
