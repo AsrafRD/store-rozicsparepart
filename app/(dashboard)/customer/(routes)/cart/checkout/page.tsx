@@ -1,29 +1,27 @@
-"use client"
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 import { Button } from "@/components/ui/button";
-import CartItem from '../components/cart-item';
+import CartItem from "../components/cart-item";
 
 interface FormData {
-  name: string,
-  email: string, // Perbaikan: Menggunakan "email" bukan "Email"
-  phone: string,
-  address: string,
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
 }
 
 const CheckoutPage: React.FC = () => {
   const items = useCart((state) => state.items);
   const [formData, setFormData] = useState<FormData>({
     name: "",
-    email: "", // Perbaikan: Menggunakan "email" bukan "Email"
+    email: "",
     phone: "",
     address: "",
   });
-  
+
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +30,6 @@ const CheckoutPage: React.FC = () => {
   };
 
   const validateForm = () => {
-    // Validasi sederhana: Pastikan semua bidang wajib diisi
     const errors: Partial<FormData> = {};
 
     if (!formData.name) {
@@ -50,7 +47,6 @@ const CheckoutPage: React.FC = () => {
 
     setFormErrors(errors);
 
-    // Validasi sederhana untuk menentukan apakah formulir valid
     return Object.keys(errors).length === 0;
   };
 
@@ -58,7 +54,6 @@ const CheckoutPage: React.FC = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      // Jika formulir valid, lanjutkan dengan permintaan
       try {
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_API_URL}/checkout`,
@@ -74,12 +69,11 @@ const CheckoutPage: React.FC = () => {
     }
   };
 
-  const totalPrice = items.reduce((total: number, item: { price: any }) => {
+  const totalPrice = items.reduce((total, item) => {
     return total + Number(item.price);
   }, 0);
 
   const [isMounted, setIsMounted] = useState(false);
-  const cart = useCart();
 
   useEffect(() => {
     setIsMounted(true);
@@ -101,14 +95,14 @@ const CheckoutPage: React.FC = () => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="border-2 mb-2 mt-1 mt-1 py-1 px-2"
+            className="border-2 mb-2 mt-1 py-1 px-2"
             required
           />
           <label htmlFor="email">Email</label>
           <input
             type="email"
-            id="email" // Perbaikan: Menggunakan "email" bukan "Email"
-            name="email" // Perbaikan: Menggunakan "email" bukan "Email"
+            id="email"
+            name="email"
             value={formData.email}
             className="border-2 mb-2 mt-1 py-1 px-2"
             onChange={handleChange}
@@ -120,17 +114,17 @@ const CheckoutPage: React.FC = () => {
             id="phone"
             name="phone"
             value={formData.phone}
-            className="border-2 mb-2 mt-1 mt-1 py-1 px-2"
+            className="border-2 mb-2 mt-1 py-1 px-2"
             onChange={handleChange}
             required
           />
-          <label htmlFor="address">Address</label> // Perbaikan: Menggunakan "address" bukan "phone"
+          <label htmlFor="address">Address</label>
           <input
-            type="text" // Perbaikan: Menggunakan "text" bukan "address"
+            type="text"
             id="address"
             name="address"
             value={formData.address}
-            className="border-2 mb-2 mt-1 mt-1 py-1 px-2"
+            className="border-2 mb-2 mt-1 py-1 px-2"
             onChange={handleChange}
             required
           />
@@ -138,8 +132,8 @@ const CheckoutPage: React.FC = () => {
 
         <div>
           <ul>
-            {cart.items.map((item) => (
-              <div className="" key={item.id}>
+            {items.map((item) => (
+              <div key={item.id}>
                 <CartItem data={item} />
               </div>
             ))}
@@ -161,7 +155,7 @@ const CheckoutPage: React.FC = () => {
           Checkout
         </Button>
       </form>
-      
+
       <Link href="/cart">
         Back to Cart/Kembali ke Keranjang
       </Link>
