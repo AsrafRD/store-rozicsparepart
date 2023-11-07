@@ -55,3 +55,18 @@ export interface Product {
     name: string;
     value: string;
   };
+
+  export interface Supplier {
+    id: string;
+    name: string;
+    address: string;
+    phone: string;
+  };
+ 
+  export interface Order {
+    id: string;
+    name: string;
+    address: string;
+    phone: string;
+    email: string;
+  };

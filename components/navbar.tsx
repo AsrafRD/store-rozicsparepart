@@ -1,90 +1,31 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
 "use client";
 
 import { Fragment, useState } from "react";
-import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  MagnifyingGlassIcon,
-  ShoppingBagIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Dialog, Transition } from "@headlessui/react";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import NavbarActions from "@/components/navbar-actions";
 import InputSearch from "./input-search";
 import Link from "next/link";
+import {
+  FacebookLogo,
+  InstagramLogo,
+  TiktokLogo,
+  WhatsappLogo,
+  X,
+} from "@phosphor-icons/react";
+import { UserButton } from "@clerk/nextjs";
+import { useSession } from "@clerk/nextjs";
 
 const navigation = {
-  categories: [
-    {
-      id: "women",
-      name: "Women",
-      sections: [
-        {
-          id: "clothing",
-          name: "Clothing",
-          items: [
-            { name: "Tops", href: "#" },
-            { name: "Dresses", href: "#" },
-            { name: "Pants", href: "#" },
-            { name: "Denim", href: "#" },
-            { name: "Sweaters", href: "#" },
-            { name: "T-Shirts", href: "#" },
-            { name: "Jackets", href: "#" },
-            { name: "Activewear", href: "#" },
-            { name: "Browse All", href: "#" },
-          ],
-        },
-        {
-          id: "accessories",
-          name: "Accessories",
-          items: [
-            { name: "Watches", href: "#" },
-            { name: "Wallets", href: "#" },
-            { name: "Bags", href: "#" },
-            { name: "Sunglasses", href: "#" },
-            { name: "Hats", href: "#" },
-            { name: "Belts", href: "#" },
-          ],
-        },
-        {
-          id: "brands",
-          name: "Brands",
-          items: [
-            { name: "Full Nelson", href: "#" },
-            { name: "My Way", href: "#" },
-            { name: "Re-Arranged", href: "#" },
-            { name: "Counterfeit", href: "#" },
-            { name: "Significant Other", href: "#" },
-          ],
-        },
-      ],
-    },
-  ],
   pages: [
     { name: "Company", href: "#" },
     { name: "Stores", href: "#" },
   ],
 };
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { session } = useSession();
 
   return (
     <div className="bg-white">
@@ -113,7 +54,7 @@ export default function Navbar() {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="relative flex w-60 h-70 flex-col overflow-y-auto bg-white pb-12 mt-10 shadow-xl">
+              <Dialog.Panel className="relative flex w-60 flex-col bg-white mt-10 shadow-xl">
                 <div className="flex justify-between items-center pb-4 pt-5 mr-5">
                   <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2">
                     <p className="font-bold text-xl">Rozic Sparepart</p>
@@ -125,7 +66,7 @@ export default function Navbar() {
                   >
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Close menu</span>
-                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                    <X size={32} aria-hidden="true" />
                   </button>
                 </div>
 
@@ -135,10 +76,8 @@ export default function Navbar() {
                 </Link> */}
 
                 <div className="space-y-4 border-t border-gray-200 px-4 py-4">
-                  <Link href="/" className="flex lg:ml-0 gap-x-2">
-                    <p className="-m-2 block p-2 font-medium text-gray-900">
-                      Dashboard
-                    </p>
+                  <Link href="/" className="-m-2 p-2 flex lg:ml-0">
+                    <p className="font-medium text-gray-900">Dashboard</p>
                   </Link>
                   {navigation.pages.map((page) => (
                     <div key={page.name} className="flow-root">
@@ -152,22 +91,84 @@ export default function Navbar() {
                   ))}
                 </div>
 
-                <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-                  <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Sign in
-                    </a>
-                  </div>
-                  <div className="flow-root">
-                    <a
-                      href="#"
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Create account
-                    </a>
+                <div className="space-y-4 py-4 my-0 border-t border-gray-200 px-4">
+                  {session ? (
+                    <div>
+                      <div className="flex items-center">
+                        <div>
+                          <UserButton afterSignOutUrl="/" />
+                        </div>
+                        <p className="ml-2">Akun</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flow-root">
+                        <a
+                          href="http://localhost:3001/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3001%2F"
+                          className="-m-2 block p-2 font-medium text-gray-900"
+                        >
+                          Sign in
+                        </a>
+                      </div>
+                      <div className="flow-root">
+                        <a
+                          href="http://localhost:3001/sign-up?redirect_url=http%3A%2F%2Flocalhost%3A3001%2F"
+                          className="-m-2 block p-2 font-medium text-gray-900"
+                        >
+                          Create account
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-0">
+                  <div className="space-y-4 pt-14 mb-0 border-b border-gray-200 px-4">
+                    <div className="flow-root">
+                      <div className="flex justify-center">
+                        <ul className="flex jusstify-center items-center text-gray-500 space-x-4 mt-4 mb-6">
+                          <li>
+                            <Link href="#">
+                              <FacebookLogo size={25} />
+                            </Link>
+                          </li>
+                          <li>
+                            <Link href="#">
+                              <WhatsappLogo size={25} />
+                            </Link>
+                          </li>
+                          <li>
+                            <Link href="#">
+                              <InstagramLogo size={25} />
+                            </Link>
+                          </li>
+                          <li>
+                            <Link href="#">
+                              <TiktokLogo size={25} />
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="flex flex-col justify-center items-center">
+                        <p className="-m-2 block p-2 font-medium text-gray-900">
+                          Alamat
+                        </p>
+                        <div className="text-sm">
+                          <ul className="flex flex-col justify-center items-center">
+                            <li>
+                              <p>Candirejo Rt.02 / Rw.03</p>
+                            </li>
+                            <li>
+                              <p>Ketangi, Kaliangkrik, Magelang</p>
+                            </li>
+                            <li>
+                              <p>Jawa Tengah, (56153) </p>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </Dialog.Panel>
@@ -196,18 +197,6 @@ export default function Navbar() {
                 <span className="sr-only">Open menu</span>
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
-
-              {/* Logo */}
-              {/* <div className="ml-4 flex lg:ml-0">
-                <a href="#">
-                  <span className="sr-only">Your Company</span>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt=""
-                  />
-                </a>
-              </div> */}
 
               {/* Flyout menus */}
 

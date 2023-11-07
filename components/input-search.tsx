@@ -1,6 +1,6 @@
 "use client";
 
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlass } from '@phosphor-icons/react';
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
 
@@ -28,7 +28,7 @@ const InputSearch = () => {
         onKeyDown={handleSearch}
       />
       <button className="absolute top-2 end-4" onClick={handleSearch}>
-        <MagnifyingGlassIcon className='h-5 w-5' />
+        <MagnifyingGlass className='h-5 w-5' />
       </button>
     </div>
   );
