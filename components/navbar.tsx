@@ -105,7 +105,7 @@ export default function Navbar() {
                     <div>
                       <div className="flow-root">
                         <a
-                          href="http://localhost:3001/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3001%2F"
+                          href="https://rozicsparepart.vercel.app/sign-in?redirect_url=https%3A%2F%2Frozicsparepart.vercel.app%2F"
                           className="-m-2 block p-2 font-medium text-gray-900"
                         >
                           Sign in
@@ -113,7 +113,7 @@ export default function Navbar() {
                       </div>
                       <div className="flow-root">
                         <a
-                          href="http://localhost:3001/sign-up?redirect_url=http%3A%2F%2Flocalhost%3A3001%2F"
+                          href="https://rozicsparepart.vercel.app/sign-up?redirect_url=https%3A%2F%2Frozicsparepart.vercel.app%2F"
                           className="-m-2 block p-2 font-medium text-gray-900"
                         >
                           Create account
